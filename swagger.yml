@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Gestione Progetto
+  description: Servizi per la gestione di progetti
+  version: 1.0.0
+  
+paths:
+  /veicolo:
+    get:
+      operationId: cercaTutti
+      description: Ritorna tutti i veicoli
+      responses:
+        '200':
+          description: operazione riuscita
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/veicoloDTO'
+            
+        '401':
+          description: errore
+          
+    post:
+      operationId: aggiungiVeicolo
+      description: Aggiunge veicolo nel db
+      requestBody:
+        description: crea prima il body per inserire nel db
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/veicoloDTO'
+        required: true
+      responses:
+        '200':
+          description: Veicolo aggiunto
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/veicoloDTO'
+        '401':
+          description: Input non valido
+          
+  /veicolo/prezzo/{prezzo}:
+    get:
+      summary: Ricerca veicolo da prezzo
+      operationId: ricercaPrezzo
+      parameters:
+      - name: prezzo
+        in: path
+        description: Il prezzo
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ricerca riuscita
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/veicoloDTO'
+        '401':
+          description: Persona not found
+          
+  /veicolo/tipologia/{tipologia}:
+    get:
+      summary: Ricerca veicolo da prezzo
+      operationId: ricercaTipologia
+      parameters:
+      - name: tipologia
+        in: path
+        description: La Tipologia (2/4) ruote
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Ricerca riuscita
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/veicoloDTO'
+        '401':
+          description: Tipologia non trovata
+          
+  /veicolo/targa/{targa}:
+    get:
+      summary: Ricerca veicolo da prezzo
+      operationId: ricercaTarga
+      parameters:
+      - name: targa
+        in: path
+        description: ID della targa
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Ricerca riuscita
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/veicoloDTO'
+        '401':
+          description: Targa non trovata
+  
+components:
+  schemas:
+    veicoloDTO:
+      type: object
+      properties:
+        marca:
+          type: string
+        modello:
+          type: string
+        prezzo:
+          type: number
+        targa:
+          type: string
+        numeroRuote:
+          type: number

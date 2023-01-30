@@ -1,0 +1,5 @@
+src/main/java/total/progetto/openapi/api/ApiUtil.java
+src/main/java/total/progetto/openapi/api/VeicoloApi.java
+src/main/java/total/progetto/openapi/api/VeicoloApiController.java
+src/main/java/total/progetto/openapi/api/VeicoloApiDelegate.java
+src/main/java/total/progetto/openapi/model/VeicoloDTO.java
